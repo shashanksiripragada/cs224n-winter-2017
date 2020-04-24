@@ -51,7 +51,8 @@ def getSentenceFeatures(tokens, wordVectors, sentence):
     ### YOUR CODE HERE
     vec_list = [tokens[word] for word in sentence]
     vecs = wordVectors[vec_list]
-    sentVector = np.sum(vecs, axis=0)
+    sentVector = np.mean(vecs, axis=0)
+
     ### END YOUR CODE
 
     assert sentVector.shape == (wordVectors.shape[1],)
@@ -89,10 +90,7 @@ def chooseBestModel(results):
     bestResult = None
 
     ### YOUR CODE HERE
-    bestdev = 0
-    for result in results:
-        if result[dev] > bestdev:
-            bestResult = result
+    bestResult = max(results, key=lambda x: x["dev"])
     ### END YOUR CODE
 
     return bestResult
